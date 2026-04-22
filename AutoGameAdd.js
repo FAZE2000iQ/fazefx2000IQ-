@@ -33,8 +33,14 @@ async function is404(file) {
 
 
 async function CreateLessons() {
-    console.log("createLesson Ran")
-for (let i = 59; i < 300; i++) {
+    console.log("createLesson Ran");
+        
+let res = await (await fetch("reasources/games.json")).json(); res = Number(res[res.length-1].File.split('-')[1].split('.')[0]);// peak🏔 line of code (ok fine i kinda cheated)
+
+        
+    let lessonsArray = []
+
+for (let i = res+1; i < 300; i++) {
 
     
     try {
@@ -48,6 +54,15 @@ for (let i = 59; i < 300; i++) {
 
     const fileOfLesson = "Lesson-" + i + ".html"
 
+    let object4Lesson = {
+        LessonName: name,
+        LessonImage:image,
+        File: fileOfLesson
+    }
+    
+
+    lessonsArray.push(object4Lesson)
+
     createButton(name, image, fileOfLesson)
 
     } catch (e) {
@@ -55,11 +70,12 @@ for (let i = 59; i < 300; i++) {
         break;
     }
 
+
     
 }
         
 
-            
+         console.log(JSON.stringify(lessonsArray, null, 2));       
 }
 
 
